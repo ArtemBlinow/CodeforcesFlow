@@ -1,0 +1,16 @@
+:root {
+  --cf-my-color: #5621f5c8;
+  --background-color: #eeeeee;  
+  --main-color: #cbcccb;
+  --main-color2: #cbcccb;
+  --cf-black: #000000;
+  --cf-white: #ffffff;
+  --cf-grey: #808080;        /* Newbie */
+  --cf-green: #77ff77;       /* Pupil */
+  --cf-cyan: #77ddff;        /* Specialist */
+  --cf-blue: #6f6ffe;        /* Expert */
+  --cf-violet: #aa00aa;      /* Candidate Master */
+  --cf-orange: #ff8c00;      /* Master */
+  --cf-red: #ff0000;         /* Grandmaster+ */
+  --cf-legendary: #cc0000;   /* Legendary Grandmaster (тёмно-красный) */
+}

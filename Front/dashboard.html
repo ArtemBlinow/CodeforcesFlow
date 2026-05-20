@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Codeforces Tracker</title>
+  <link rel="icon" type="image/png" sizes="64x64" href="codeforces.png" />
+  <link rel="stylesheet" href="colors.css" />
+  <link rel="stylesheet" href="dashboard.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="profile-card">
+      <div class="profile-header">
+        <img id="avatar" class="avatar" src="" alt="Аватар" />
+        <div class="profile-info">
+          <h1 id="full-name">—</h1>
+          <p id="handle" class="handle">—</p>
+          <p id="country-city">—</p>
+        </div>
+      </div>
+
+      <div class="profile-stats">
+        <div class="stat-item" id="stat-rating">
+          <span class="stat-label">Рейтинг:</span>
+          <span class="stat-value" id="rating">—</span>
+        </div>
+        <div class="stat-item" id="stat-rank">
+          <span class="stat-label">Ранг:</span>
+          <span class="stat-value" id="rank">—</span>
+        </div>
+      </div>
+
+      <button id="logout-btn" class="logout-btn">Выйти</button>
+    </div>
+
+    <div class="training-section">
+      <h2>Тренировки</h2>
+      <a href="contest.html" class="btn">Написать тренировку</a>
+    </div>
+
+    <!-- История активности с Codeforces -->
+    <div class="history-section">
+      <div class="section-header">
+        <h2>Активность за последние 10 дней</h2>
+      </div>
+      
+      <div class="activity-bars">
+        <div class="activity-label">Решено задач по дням:</div>
+        <div class="bars-container" id="activity-bars">
+          <div class="loading-bars">Загрузка с Codeforces...</div>
+        </div>
+      </div>
+      
+      <div class="key-metrics">
+        <div class="metric-card">
+          <div class="metric-value" id="total-last-10">0</div>
+          <div class="metric-label">Всего решено</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-value" id="current-streak">0</div>
+          <div class="metric-label">Дней решал</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-value" id="avg-per-day">0</div>
+          <div class="metric-label">В среднем в день</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-value" id="best-day-count">0</div>
+          <div class="metric-label">Рекорд за день</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="dashboard.js"></script>
+  <script src="history.js"></script>
+</body>
+</html>

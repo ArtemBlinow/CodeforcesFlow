@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Codeforces Tracker</title>
+  <link rel="icon" type="image/png" sizes="64x64" href="codeforces.png" />
+  <link rel="stylesheet" href="colors.css" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="auth-container">
+    <header class="auth-header">
+      <h1>Codeforces Tracker</h1>
+      <p class="auth-tagline">Следи за прогрессом. Ставь цели. Решай задачи.</p>
+    </header>
+
+    <main class="auth-main">
+      <form id="auth-form" class="auth-form">
+        <div class="form-field">
+          <h2 for="handle-input">Хэндл</h2>
+          <input
+            type="text"
+            id="handle-input"
+            name="handle"
+            placeholder="Например: tourist"
+            autocomplete="off"
+            spellcheck="false"
+          />
+          <div id="handle-error" class="error-message"></div>
+        </div>
+
+        <button type="submit" class="auth-submit-btn">
+          <span>Войти</span>
+        </button>
+      </form>
+    </main>
+
+    <footer>
+        <p>
+          Данные берутся только из публичного API Codeforces.  
+          Мы не сохраняем ваш пароль — здесь его даже не просят!
+        </p>
+    </footer>
+  </div>
+
+  <div class="developer-info-footer">
+    <p>// Разработано Блиновым Артёмом в рамках курсовой работы</p>
+  </div>
+
+  <script src="auth.js"></script>
+</body>
+</html>

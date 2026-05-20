@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Codeforces Tracker</title>
+  <link rel="icon" type="image/png" sizes="64x64" href="codeforces.png" />
+  <link rel="stylesheet" href="colors.css" />
+  <link rel="stylesheet" href="contest.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Contest Tracker</h1>
+
+    <div>
+      <div id="setup" class="setup">
+        <input id="contestId" type="text" placeholder="ID контеста (например: 1935)" />
+        <div class="type-toggle">
+          <div class="type-btn active" data-type="contest">Раунд</div>
+          <div class="type-btn" data-type="gym">Тренировка</div>
+        </div>
+        <div class="mode-toggle">
+          <div class="mode-btn active" data-mode="individual">Индивидуальный</div>
+          <div class="mode-btn" data-mode="team">Командный</div>
+        </div>
+        <button id="startBtn">Старт</button>
+      </div>
+    </div>
+
+    <div>
+      <div id="tracker" class="hidden">
+        <div class="timer" id="timer">00:00:00</div>
+        <div class="controls">
+          <button id="pauseBtn">Стоп</button>
+          <button id="finishBtn">Завершить</button>
+        </div>
+        
+        <div class="problem-grid" id="problemGrid"></div>
+        <div id="problemTitle" class="problem-title hidden"></div>
+        
+        <div class="problem-stats" id="problemStats">
+          <h3 id="currentProblemStatsTitle">Статистика для задачи <span id="currentProblemLetter">—</span></h3>
+          <div class="stats-grid">
+            <div class="stat-item">
+              <span class="stat-label">📖 Чтение:</span>
+              <span class="stat-value" id="timeReading">00:00:00</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">💡 Решение:</span>
+              <span class="stat-value" id="timeThinking">00:00:00</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">💻 Код:</span>
+              <span class="stat-value" id="timeCoding">00:00:00</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">🪲 Проверка:</span>
+              <span class="stat-value" id="timeDebugging">00:00:00</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">🐞 Отладка:</span>
+              <span class="stat-value" id="timePenalty">00:00:00</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">📝 Прочее:</span>
+              <span class="stat-value" id="timeOther">00:00:00</span>
+            </div>
+          </div>
+          
+          <div class="stage-selector">
+            <h4>Чем сейчас занят?</h4>
+            <div class="stage-buttons">
+              <button class="stage-btn" data-stage="reading">📖 Чтение</button>
+              <button class="stage-btn" data-stage="thinking">💡 Решение</button>
+              <button class="stage-btn" data-stage="coding">💻 Код</button>
+              <button class="stage-btn" data-stage="debuggingBefore">🪲 Проверка</button>
+              <button class="stage-btn" data-stage="debuggingAfter">🐞 Отладка</button>
+              <button class="stage-btn" data-stage="other">📝 Прочее</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div id="results" class="hidden">
+        <h3>Результаты контеста</h3>
+      </div>
+    </div>
+  </div>
+
+  <script src="contest.js"></script>
+</body>
+</html>
