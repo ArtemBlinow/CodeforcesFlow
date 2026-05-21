@@ -29,7 +29,16 @@ body {
 .auth-card h1 {
     text-align: center;
     margin-bottom: 1.5rem;
-    color: #5621f5c8;
+}
+
+.auth-card h1 a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.auth-card h1 a:hover {
+    color: #00bcd4;
 }
 
 .auth-tabs {
@@ -49,11 +58,12 @@ body {
     font-weight: 600;
     cursor: pointer;
     border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-bottom-color 0.2s;
 }
 
 .tab-btn.active {
-    color: #5621f5c8;
-    border-bottom-color: #5621f5c8;
+    color: white;
+    border-bottom-color: rgba(255, 255, 255, 0.8);
 }
 
 .auth-form {
@@ -73,11 +83,12 @@ body {
     border-radius: 8px;
     color: white;
     font-size: 1rem;
+    transition: border-color 0.2s;
 }
 
 .auth-form input:focus {
     outline: none;
-    border-color: #5621f5c8;
+    border-color: rgba(255, 255, 255, 0.6);
 }
 
 .auth-form label {
@@ -91,17 +102,18 @@ body {
 .auth-form button {
     width: 100%;
     padding: 0.75rem;
-    background: #5621f5c8;
-    border: none;
+    background: rgba(30, 40, 30, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 8px;
     color: white;
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
+    transition: background 0.2s;
 }
 
 .auth-form button:hover {
-    opacity: 0.85;
+    background: rgba(50, 60, 50, 0.8);
 }
 
 .error {
@@ -163,8 +175,8 @@ body {
 }
 
 .checkbox input:checked+span:before {
-    background: var(--cf-my-color);
-    border-color: var(--cf-my-color);
+    background: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.6);
 }
 
 .checkbox input:checked+span:after {

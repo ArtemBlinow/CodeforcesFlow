@@ -18,11 +18,11 @@ function formatTime(seconds) {
     if (isNaN(secs) || secs < 0) {
         return '00:00:00';
     }
-    
+
     const hrs = Math.floor(secs / 3600);
     const mins = Math.floor((secs % 3600) / 60);
     const secsRemainder = secs % 60;
-    
+
     return `${hrs.toString().padStart(2, '0')}:${mins.toString().padStart(2, '0')}:${secsRemainder.toString().padStart(2, '0')}`;
 }
 
@@ -37,18 +37,18 @@ function updateTimer() {
 function startTimer() {
     if (timerInterval) return;
     isRunning = true;
-    
+
     const pauseBtn = document.getElementById('pauseBtn');
     if (pauseBtn) pauseBtn.textContent = 'Стоп';
-    
+
     timerInterval = setInterval(() => {
         elapsedTime++;
         updateTimer();
-        
+
         if (currentStage && currentProblemLetter) {
             addTimeToCurrentStage();
         }
-        
+
         saveState();
     }, 1000);
 }
@@ -59,17 +59,17 @@ function pauseTimer() {
         timerInterval = null;
     }
     isRunning = false;
-    
+
     const pauseBtn = document.getElementById('pauseBtn');
     if (pauseBtn) pauseBtn.textContent = 'Возобновить';
-    
+
     saveState();
 }
 
 // ========== ДОБАВЛЕНИЕ ВРЕМЕНИ К ЭТАПУ ==========
 function addTimeToCurrentStage() {
     if (!currentProblemLetter || !currentStage) return;
-    
+
     // Инициализируем статистику для задачи если её нет
     if (!problemStats[currentProblemLetter]) {
         problemStats[currentProblemLetter] = {
@@ -81,15 +81,15 @@ function addTimeToCurrentStage() {
             other: 0
         };
     }
-    
+
     // Проверяем что текущий этап существует
     if (!problemStats[currentProblemLetter][currentStage]) {
         problemStats[currentProblemLetter][currentStage] = 0;
     }
-    
+
     // Добавляем секунду к текущему этапу
     problemStats[currentProblemLetter][currentStage] += 1;
-    
+
     // Обновляем отображение
     updateProblemStatsDisplay();
 }
@@ -98,11 +98,11 @@ function addTimeToCurrentStage() {
 function renderProblems() {
     const grid = document.getElementById('problemGrid');
     if (!grid) return;
-    
+
     grid.innerHTML = '';
-    
+
     if (!problems || problems.length === 0) return;
-    
+
     problems.forEach(p => {
         const box = document.createElement('div');
         box.className = 'problem-box';
@@ -111,14 +111,14 @@ function renderProblems() {
         box.onclick = () => {
             currentProblemLetter = p.letter;
             renderProblems();
-            
+
             // Показываем название задачи
             const problemTitle = document.getElementById('problemTitle');
             if (problemTitle) {
                 problemTitle.textContent = p.title || `Задача ${p.letter}`;
                 problemTitle.classList.remove('hidden');
             }
-            
+
             // Инициализируем статистику если её нет
             if (!problemStats[currentProblemLetter]) {
                 problemStats[currentProblemLetter] = {
@@ -130,21 +130,21 @@ function renderProblems() {
                     other: 0
                 };
             }
-            
+
             // Обновляем отображение
             updateProblemStatsDisplay();
             updateCurrentProblemTitle();
-            
+
             saveState();
         };
         grid.appendChild(box);
     });
-    
+
     // Автовыбор первой задачи
     if (!currentProblemLetter && problems.length > 0) {
         const firstProblem = problems[0];
         currentProblemLetter = firstProblem.letter;
-        
+
         if (!problemStats[currentProblemLetter]) {
             problemStats[currentProblemLetter] = {
                 reading: 0,
@@ -155,13 +155,13 @@ function renderProblems() {
                 other: 0
             };
         }
-        
+
         const problemTitle = document.getElementById('problemTitle');
         if (problemTitle) {
             problemTitle.textContent = firstProblem.title || `Задача ${firstProblem.letter}`;
             problemTitle.classList.remove('hidden');
         }
-        
+
         updateProblemStatsDisplay();
         updateCurrentProblemTitle();
         renderProblems();
@@ -171,19 +171,19 @@ function renderProblems() {
 // ========== ОБНОВЛЕНИЕ СТАТИСТИКИ ==========
 function updateProblemStatsDisplay() {
     if (!currentProblemLetter || !problemStats[currentProblemLetter]) return;
-    
+
     const stats = problemStats[currentProblemLetter];
-    
+
     // Маппинг ID элементов на ключи статистики
     const elementMapping = {
         'timeReading': 'reading',
-        'timeThinking': 'thinking', 
+        'timeThinking': 'thinking',
         'timeCoding': 'coding',
         'timeDebugging': 'debuggingBefore', // 🪲 Отладка до отправки
         'timePenalty': 'debuggingAfter',    // 🐞 Отладка после отправки
         'timeOther': 'other'
     };
-    
+
     for (const [elementId, statKey] of Object.entries(elementMapping)) {
         const element = document.getElementById(elementId);
         if (element) {
@@ -207,9 +207,9 @@ function switchStage(newStage) {
         alert('Сначала выберите задачу!');
         return;
     }
-    
+
     currentStage = newStage;
-    
+
     // Обновляем кнопки
     const stageButtons = document.querySelectorAll('.stage-btn');
     if (stageButtons) {
@@ -220,14 +220,14 @@ function switchStage(newStage) {
             }
         });
     }
-    
+
     console.log('Активный этап:', currentStage, 'для задачи:', currentProblemLetter);
 }
 
 // ========== СОХРАНЕНИЕ СОСТОЯНИЯ ==========
 function saveState() {
     const contestId = document.getElementById('contestId')?.value?.trim() || '';
-    
+
     const state = {
         contestId,
         problems,
@@ -238,7 +238,7 @@ function saveState() {
         problemStats,
         timestamp: Date.now()
     };
-    
+
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
 }
 
@@ -246,7 +246,7 @@ function clearState() {
     if (timerInterval) clearInterval(timerInterval);
     timerInterval = null;
     localStorage.removeItem(STORAGE_KEY);
-    
+
     // Сброс переменных
     elapsedTime = 0;
     problems = [];
@@ -264,16 +264,16 @@ async function restoreSession(state) {
     isRunning = state.isRunning || false;
     problemStats = state.problemStats || {};
     currentStage = state.currentStage || null;
-    
+
     // Показываем трекер
     document.getElementById('setup').classList.add('hidden');
     document.getElementById('tracker').classList.remove('hidden');
-    
+
     // Обновляем интерфейс
     updateTimer();
     renderProblems();
     updateProblemStatsDisplay();
-    
+
     if (currentProblemLetter) {
         const p = problems.find(x => x.letter === currentProblemLetter);
         if (p) {
@@ -284,7 +284,7 @@ async function restoreSession(state) {
             }
         }
     }
-    
+
     // Восстанавливаем активный этап
     if (currentStage) {
         const stageButtons = document.querySelectorAll('.stage-btn');
@@ -295,7 +295,7 @@ async function restoreSession(state) {
             }
         });
     }
-    
+
     // Назначаем обработчики
     document.getElementById('pauseBtn').onclick = () => {
         if (isRunning) {
@@ -304,7 +304,7 @@ async function restoreSession(state) {
             startTimer();
         }
     };
-    
+
     // Запускаем таймер если нужно
     if (isRunning) {
         startTimer();
@@ -314,12 +314,20 @@ async function restoreSession(state) {
 // ========== ЗАВЕРШЕНИЕ КОНТЕСТА ==========
 function finishContest() {
     pauseTimer();
-    
-    // Скрываем трекер
-    document.getElementById('tracker').classList.add('hidden');
-    
+
     // Показываем результаты
     showResults();
+
+    // Пытаемся сохранить в базу (демо)
+    saveToDatabase()
+        .then(() => {
+            console.log('Данные успешно сохранены в базу');
+            // Можно показать уведомление пользователю
+        })
+        .catch(err => {
+            console.error('Не удалось сохранить в базу:', err);
+            // В демке просто логируем, потом сделаем нормальную обработку
+        });
 }
 
 function showResults() {
@@ -328,29 +336,29 @@ function showResults() {
         console.error('Элемент results не найден!');
         return;
     }
-    
+
     resultsDiv.innerHTML = '<h3>Результаты контеста</h3>';
-    
+
     // Общее время контеста
     const totalTimeDiv = document.createElement('div');
     totalTimeDiv.className = 'total-time';
     totalTimeDiv.innerHTML = `<h4>Общее время контеста: ${formatTime(elapsedTime)}</h4>`;
     resultsDiv.appendChild(totalTimeDiv);
-    
+
     // Статистика по задачам
     if (problems && problems.length > 0) {
         problems.forEach(problem => {
             const problemDiv = document.createElement('div');
             problemDiv.className = 'problem-result';
-            
+
             const stats = problemStats[problem.letter] || {};
-            
+
             // Безопасный подсчет общего времени задачи
             const totalProblemTime = Object.values(stats).reduce((sum, value) => {
                 const numValue = Number(value) || 0;
                 return sum + numValue;
             }, 0);
-            
+
             const stageLabels = {
                 reading: '📖 Чтение условия',
                 thinking: '💡 Обдумывание решения',
@@ -359,18 +367,18 @@ function showResults() {
                 debuggingAfter: '🐞 Отладка',
                 other: '📝 Прочее'
             };
-            
+
             let statsHTML = '<div class="problem-stats-list">';
             let hasStats = false;
-            
+
             for (const [stage, time] of Object.entries(stats)) {
                 const timeValue = Number(time) || 0;
                 if (timeValue > 0) {
                     hasStats = true;
-                    const percent = totalProblemTime > 0 
-                        ? Math.round((timeValue / totalProblemTime) * 100) 
+                    const percent = totalProblemTime > 0
+                        ? Math.round((timeValue / totalProblemTime) * 100)
                         : 0;
-                    
+
                     statsHTML += `
                         <div class="stat-row">
                             <span>${stageLabels[stage] || stage}</span>
@@ -379,19 +387,19 @@ function showResults() {
                     `;
                 }
             }
-            
+
             if (!hasStats) {
                 statsHTML += '<div class="stat-row">Нет данных по этапам</div>';
             }
-            
+
             statsHTML += '</div>';
-            
+
             problemDiv.innerHTML = `
                 <div class="problem-header">Задача ${problem.letter}: ${problem.title || ''}</div>
                 <div class="problem-total">Всего времени: ${formatTime(totalProblemTime)}</div>
                 ${statsHTML}
             `;
-            
+
             resultsDiv.appendChild(problemDiv);
         });
     } else {
@@ -400,7 +408,7 @@ function showResults() {
         noProblems.textContent = 'Нет данных о задачах';
         resultsDiv.appendChild(noProblems);
     }
-    
+
     // Кнопки действий
     const actionsDiv = document.createElement('div');
     actionsDiv.className = 'result-actions';
@@ -408,14 +416,14 @@ function showResults() {
         <button id="exportCSVBtn" class="export-btn">📄 Экспорт в CSV</button>
         <button id="exitBtn" class="exit-btn">Выйти</button>
     `;
-    
+
     resultsDiv.appendChild(actionsDiv);
-    
+
     // Обработчики кнопок
     setTimeout(() => {
         const exportBtn = document.getElementById('exportCSVBtn');
         const exitBtn = document.getElementById('exitBtn');
-        
+
         if (exportBtn) {
             exportBtn.onclick = exportData;
         }
@@ -423,7 +431,7 @@ function showResults() {
             exitBtn.onclick = exitToDashboard;
         }
     }, 100);
-    
+
     // Показываем результаты
     resultsDiv.classList.remove('hidden');
 }
@@ -435,18 +443,18 @@ function exportToCSV() {
             alert('Нет данных для экспорта');
             return;
         }
-        
+
         const contestId = document.getElementById('contestId')?.value?.trim() || 'unknown';
         const date = new Date().toISOString().split('T')[0];
-        
+
         // Заголовки
         let csv = 'Задача,Название,Чтение условия (сек),Обдумывание решения (сек),Написание кода (сек),Отладка до отправки (сек),Отладка после отправки (сек),Прочее (сек),Всего (сек)\n';
-        
+
         // Данные по задачам
         problems.forEach(problem => {
             const stats = problemStats[problem.letter] || {};
             const total = Object.values(stats).reduce((a, b) => a + b, 0);
-            
+
             const row = [
                 `"${problem.letter}"`,
                 `"${(problem.title || '').replace(/"/g, '""')}"`,
@@ -458,13 +466,13 @@ function exportToCSV() {
                 stats.other || 0,
                 total
             ].join(',');
-            
+
             csv += row + '\n';
         });
-        
+
         // Итог
         csv += `\n"ИТОГО","",,,,,,,${elapsedTime}\n`;
-        
+
         // Создаем и скачиваем файл
         const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
         const link = document.createElement('a');
@@ -475,9 +483,9 @@ function exportToCSV() {
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
-        
+
         console.log('CSV экспортирован');
-        
+
     } catch (error) {
         console.error('Ошибка экспорта CSV:', error);
         alert('Ошибка при экспорте CSV');
@@ -491,10 +499,10 @@ function exportData() {
             alert('Нет данных для экспорта');
             return;
         }
-        
+
         const contestId = document.getElementById('contestId')?.value?.trim() || 'unknown';
         const date = new Date().toISOString().split('T')[0];
-        
+
         const headers = [
             'Задача',
             'Название',
@@ -506,12 +514,12 @@ function exportData() {
             'Прочее (сек)',
             'Всего (сек)'
         ];
-        
+
         let content = '';
         let mimeType = '';
         let fileExt = '';
         let delimiter = '';
-        
+
         if (format === 'csv') {
             // CSV с BOM для Excel
             content = '\uFEFF';
@@ -524,14 +532,14 @@ function exportData() {
             mimeType = 'text/tab-separated-values;charset=utf-8;';
             fileExt = 'tsv';
         }
-        
+
         content += headers.join(delimiter) + '\r\n';
-        
+
         problems.forEach(problem => {
             const stats = problemStats[problem.letter] || {};
             const total = Object.values(stats).reduce((a, b) => a + b, 0);
-            
-            const row = format === 'csv' 
+
+            const row = format === 'csv'
                 ? [
                     `"${problem.letter}"`,
                     `"${(problem.title || '').replace(/"/g, '""')}"`,
@@ -554,26 +562,26 @@ function exportData() {
                     stats.other || 0,
                     total
                 ];
-            
+
             content += row.join(delimiter) + '\r\n';
         });
-        
+
         content += `\r\nИТОГО${delimiter.repeat(8)}${elapsedTime}`;
-        
+
         const blob = new Blob([content], { type: mimeType });
         const link = document.createElement('a');
         link.href = URL.createObjectURL(blob);
         link.download = `codeforces_${contestId}_${date}.${fileExt}`;
         document.body.appendChild(link);
         link.click();
-        
+
         setTimeout(() => {
             document.body.removeChild(link);
             URL.revokeObjectURL(link.href);
         }, 100);
-        
+
         console.log(`${format.toUpperCase()} экспортирован`);
-        
+
     } catch (error) {
         console.error('Ошибка экспорта:', error);
         alert(`Ошибка экспорта: ${error.message}`);
@@ -583,13 +591,7 @@ function exportData() {
 // ========== ВЫХОД ==========
 function exitToDashboard() {
     clearState();
-    
-    const handle = localStorage.getItem('cf_handle');
-    if (handle) {
-        window.location.href = `dashboard.html?handle=${encodeURIComponent(handle)}`;
-    } else {
-        window.location.href = 'index.html';
-    }
+    window.location.href = '/';
 }
 
 function exitWithoutSave() {
@@ -603,25 +605,24 @@ function exitWithoutSave() {
 async function fetchProblems(contestId) {
     try {
         const response = await fetch(
-            `https://codeforces.com/api/contest.standings?contestId=${contestId}&from=1&count=1`,
-            { timeout: 10000 }
+            `https://codeforces.com/api/contest.standings?contestId=${contestId}`
         );
-        
+
         if (!response.ok) throw new Error(`HTTP ошибка: ${response.status}`);
-        
+
         const data = await response.json();
         if (data.status !== 'OK') throw new Error(data.comment || 'Ошибка API');
-        
+
         if (!data.result?.problems?.length) {
             throw new Error('Не найдены задачи для этого контеста');
         }
-        
+
         return data.result.problems.map(p => ({
             letter: p.index,
             title: p.name,
             rating: p.rating || 0
         }));
-        
+
     } catch (error) {
         throw new Error(`Не удалось загрузить задачи: ${error.message}`);
     }
@@ -630,14 +631,14 @@ async function fetchProblems(contestId) {
 // ========== ИНИЦИАЛИЗАЦИЯ ==========
 document.addEventListener('DOMContentLoaded', async () => {
     console.log('Contest tracker инициализирован');
-    
+
     // Проверяем сохраненную сессию
     const saved = localStorage.getItem(STORAGE_KEY);
     if (saved) {
         try {
             const state = JSON.parse(saved);
             const hoursSinceSave = (Date.now() - state.timestamp) / (1000 * 60 * 60);
-            
+
             if (hoursSinceSave < 24 && state.contestId && state.problems) {
                 await restoreSession(state);
                 return;
@@ -647,24 +648,24 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
         localStorage.removeItem(STORAGE_KEY);
     }
-    
+
     // Переключатели типа и режима
     document.querySelectorAll('.type-btn, .mode-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
+        btn.addEventListener('click', function () {
             this.parentElement.querySelectorAll('.active').forEach(el => {
                 el.classList.remove('active');
             });
             this.classList.add('active');
         });
     });
-    
+
     // Кнопки этапов
     document.querySelectorAll('.stage-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
+        btn.addEventListener('click', function () {
             switchStage(this.dataset.stage);
         });
     });
-    
+
     // Кнопка старта
     document.getElementById('startBtn').addEventListener('click', async () => {
         const contestId = document.getElementById('contestId').value.trim();
@@ -672,29 +673,29 @@ document.addEventListener('DOMContentLoaded', async () => {
             alert('Введите ID контеста');
             return;
         }
-        
+
         const btn = document.getElementById('startBtn');
         btn.disabled = true;
         btn.textContent = 'Загрузка...';
-        
+
         try {
             problems = await fetchProblems(contestId);
-            
+
             // Сброс состояния
             elapsedTime = 0;
             currentProblemLetter = null;
             isRunning = false;
             problemStats = {};
             currentStage = null;
-            
+
             // Показываем трекер
             document.getElementById('setup').classList.add('hidden');
             document.getElementById('tracker').classList.remove('hidden');
-            
+
             // Обновляем интерфейс
             updateTimer();
             renderProblems();
-            
+
             // Назначаем обработчики
             document.getElementById('pauseBtn').onclick = () => {
                 if (isRunning) {
@@ -703,14 +704,14 @@ document.addEventListener('DOMContentLoaded', async () => {
                     startTimer();
                 }
             };
-            
+
             document.getElementById('finishBtn').onclick = finishContest;
-            
+
             // Начинаем отсчет
             startTimer();
-            
+
             console.log('Контест начат');
-            
+
         } catch (error) {
             alert('Ошибка: ' + error.message);
         } finally {
@@ -718,6 +719,60 @@ document.addEventListener('DOMContentLoaded', async () => {
             btn.textContent = 'Старт';
         }
     });
-    
+
     document.getElementById('contestId')?.focus();
 });
+
+// ========== СОХРАНЕНИЕ В БАЗУ ==========
+async function saveToDatabase() {
+    try {
+        const contestId = document.getElementById('contestId')?.value?.trim();
+        const typeBtn = document.querySelector('.type-btn.active');
+        const modeBtn = document.querySelector('.mode-btn.active');
+        
+        const platform = typeBtn ? typeBtn.dataset.type : 'contest';
+        const mode = modeBtn ? modeBtn.dataset.mode : 'individual';
+
+        // Собираем данные о задачах
+        const problemsData = problems.map(p => ({
+            letter: p.letter,
+            title: p.title,
+            rating: p.rating || 0,
+            stats: problemStats[p.letter] || {},
+            solved: false, // потом добавишь галочку в интерфейс
+            attempts: 0,
+            solutionTime: null,
+            comment: ''
+        }));
+
+        const payload = {
+            contestId,
+            contestName: `Codeforces Round #${contestId}`,
+            platform,
+            mode,
+            totalTime: elapsedTime,
+            problems: problemsData
+        };
+
+        const response = await fetch('/api/contest/save', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(payload)
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+            console.log('✅ Сохранено в базу:', result);
+            return true;
+        } else {
+            throw new Error(result.message || 'Ошибка сохранения');
+        }
+
+    } catch (error) {
+        console.error('❌ Ошибка сохранения:', error);
+        throw error;
+    }
+}

@@ -76,12 +76,6 @@ body {
   font-weight: 600;
 }
 
-.profile-actions {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-
 .btn {
   display: block;
   width: 100%;
@@ -102,9 +96,17 @@ body {
   background-color: var(--cf-black);
 }
 
+/* Отступы между кнопками */
+.profile-actions,
+.training-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
 .training-section h2 {
   font-size: 1.35rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0;
   text-align: center;
 }
 
