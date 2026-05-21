@@ -1,0 +1,370 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #eeeeee;
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 2rem;
+}
+
+.account-container {
+    width: 100%;
+    max-width: 520px;
+    padding: 1rem;
+}
+
+.account-card {
+    background: rgba(10, 20, 10, 0.85);
+    border-radius: 16px;
+    padding: 2rem;
+    color: white;
+}
+
+/* Шапка */
+.account-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.brand-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--main-color);
+    text-decoration: none;
+    display: block;
+}
+
+.brand-title:hover {
+    opacity: 0.8;
+}
+
+.account-card h2 {
+    font-size: 1rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.6);
+    margin-top: 0.25rem;
+}
+
+/* Секции */
+.section {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.section:last-of-type {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.section-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 1rem;
+}
+
+/* Информационные строки */
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+}
+
+.info-label {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.9rem;
+}
+
+.info-value {
+    color: white;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+/* Поля ввода */
+input[type="password"] {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 0.75rem;
+    background: rgba(30, 40, 30, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    color: white;
+    font-size: 1rem;
+}
+
+input[type="password"]:focus {
+    outline: none;
+    border-color: #5621f5c8;
+}
+
+input[type="password"]::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+/* Подсказки */
+.hint {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.8rem;
+    margin-bottom: 0.75rem;
+    line-height: 1.4;
+}
+
+/* Чекбокс */
+.checkbox {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    user-select: none;
+    margin-bottom: 0.5rem;
+}
+
+.checkbox input {
+    display: none;
+}
+
+.checkbox span {
+    position: relative;
+    padding-left: 28px;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.checkbox span:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+    background: rgba(30, 40, 30, 0.7);
+    transition: all 0.2s;
+}
+
+.checkbox span:after {
+    content: '✓';
+    position: absolute;
+    left: 4px;
+    top: 50%;
+    transform: translateY(-50%) scale(0);
+    font-size: 12px;
+    color: white;
+    transition: transform 0.2s;
+}
+
+.checkbox input:checked+span:before {
+    background: #5621f5c8;
+    border-color: #5621f5c8;
+}
+
+.checkbox input:checked+span:after {
+    transform: translateY(-50%) scale(1);
+}
+
+/* Кнопки */
+.logout-section {
+    padding-top: 0.5rem;
+}
+
+.btn-secondary {
+    width: 100%;
+    padding: 0.65rem;
+    background: var(--cf-grey);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+
+.btn-secondary:hover {
+    background: var(--cf-black);
+}
+
+.btn-danger {
+    width: 100%;
+    padding: 0.65rem;
+    background: rgba(255, 50, 50, 0.2);
+    border: 1px solid rgba(255, 50, 50, 0.5);
+    border-radius: 8px;
+    color: #ff8888;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    transition: background 0.2s;
+}
+
+.btn-danger:hover {
+    background: rgba(255, 50, 50, 0.4);
+}
+
+/* Сессии */
+.sessions-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.session-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.65rem 0.75rem;
+    background: rgba(30, 40, 30, 0.7);
+    border-radius: 8px;
+    font-size: 0.85rem;
+}
+
+.session-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.session-device {
+    color: white;
+}
+
+.session-expires {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.75rem;
+}
+
+.session-current {
+    color: rgba(253, 246, 246, 0.875);
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.session-revoke {
+    background: none;
+    border: 1px solid rgba(255, 80, 80, 0.5);
+    color: #ff8888;
+    padding: 0.3rem 0.65rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.75rem;
+    transition: background 0.2s;
+    border: none;
+}
+
+.session-revoke:hover {
+    background: rgba(255, 50, 50, 0.2);
+}
+
+.placeholder-text {
+    color: rgba(255, 255, 255, 0.4);
+    text-align: center;
+    font-size: 0.85rem;
+}
+
+/* Ошибки */
+.error {
+    background: rgba(255, 50, 50, 0.2);
+    border: 1px solid rgba(255, 50, 50, 0.5);
+    border-radius: 8px;
+    padding: 0.75rem;
+    margin-bottom: 0.75rem;
+    color: #ff8888;
+    font-size: 0.85rem;
+    text-align: center;
+}
+
+.error.hidden,
+.error:empty {
+    display: none;
+}
+
+/* Модальное окно */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal.hidden {
+    display: none;
+}
+
+.modal-content {
+    background: rgba(20, 30, 20, 0.95);
+    border-radius: 16px;
+    padding: 2rem;
+    max-width: 420px;
+    width: 90%;
+    color: white;
+}
+
+.modal-content h2 {
+    color: #ff8888;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+.modal-content p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+    text-align: center;
+}
+
+.modal-content input {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    background: rgba(30, 40, 30, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    color: white;
+    font-size: 1rem;
+}
+
+.modal-content input:focus {
+    outline: none;
+    border-color: #ff8888;
+}
+
+.modal-buttons {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.modal-buttons button {
+    flex: 1;
+}
+
+/* Опасная зона */
+.section-danger {
+    border-bottom: none;
+}
+
+.section-danger .section-title {
+    color: #ff8888;
+}

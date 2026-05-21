@@ -14,14 +14,6 @@ async function register(login, password) {
         return { success: false, error: 'Логин и пароль обязательны' };
     }
 
-    if (login.length < 3) {
-        return { success: false, error: 'Логин должен быть минимум 3 символа' };
-    }
-
-    if (password.length < 4) {
-        return { success: false, error: 'Пароль должен быть минимум 4 символа' };
-    }
-
     const passwordHash = hashPassword(password);
 
     try {
@@ -76,14 +68,15 @@ async function login(login, password, rememberMe = false) {
         const token = generateToken();
         const expiresDays = rememberMe ? 30 : 1;
 
-        // Вычисляем дату на JavaScript
         const expiresAt = new Date();
         expiresAt.setDate(expiresAt.getDate() + expiresDays);
+
+        const expiresStr = expiresAt.toISOString().replace('T', ' ').substring(0, 19);
 
         await new Promise((resolve, reject) => {
             db.run(
                 'INSERT INTO sessions (token, user_id, expires_at) VALUES (?, ?, ?)',
-                [token, user.id, expiresAt.toISOString()],
+                [token, user.id, expiresStr],
                 (err) => {
                     if (err) reject(err);
                     else resolve();
@@ -154,4 +147,69 @@ async function logout(token) {
     }
 }
 
-module.exports = { register, login, checkSession, logout };
+async function getLoginByUserId(userId) {
+    if (!userId) return 'unknown';
+    try {
+        const db = require('./db');
+        const user = await new Promise((resolve, reject) => {
+            db.get('SELECT login FROM users WHERE id = ?', [userId], (err, row) => {
+                if (err) reject(err);
+                else resolve(row);
+            });
+        });
+        return user ? user.login : 'unknown';
+    } catch (err) {
+        return 'unknown';
+    }
+}
+
+async function getUserById(userId) {
+    try {
+        const user = await new Promise((resolve, reject) => {
+            db.get(
+                'SELECT id, login, private_profile, created_at FROM users WHERE id = ?',
+                [userId],
+                (err, row) => {
+                    if (err) reject(err);
+                    else resolve(row);
+                }
+            );
+        });
+        return user;
+    } catch (err) {
+        console.error(err);
+        return null;
+    }
+}
+
+async function getSessionsByUserId(userId) {
+    try {
+        const sessions = await new Promise((resolve, reject) => {
+            db.all(
+                `SELECT token, expires_at 
+                 FROM sessions 
+                 WHERE user_id = ? AND expires_at > datetime("now")`,
+                [userId],
+                (err, rows) => {
+                    if (err) reject(err);
+                    else resolve(rows);
+                }
+            );
+        });
+        return sessions;
+    } catch (err) {
+        console.error(err);
+        return [];
+    }
+}
+
+async function getUserIdFromSession(token) {
+    if (!token) return null;
+    const result = await checkSession(token);
+    return result.success ? result.user.id : null;
+}
+
+module.exports = {
+    register, login, checkSession, logout,
+    getLoginByUserId, getUserById, getSessionsByUserId, getUserIdFromSession
+};

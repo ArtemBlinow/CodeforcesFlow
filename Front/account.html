@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Управление аккаунтом</title>
+    <link rel="stylesheet" href="colors.css">
+    <link rel="stylesheet" href="account.css">
+</head>
+
+<body>
+    <div class="account-container">
+        <div class="account-card">
+            <div class="account-header">
+                <div>
+                    <a href="/" class="brand-title">Codeforces Flow</a>
+                    <h2>Управление аккаунтом</h2>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">Основная информация</h2>
+                <div class="info-row">
+                    <span class="info-label">Логин</span>
+                    <span class="info-value" id="account-login">—</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Дата регистрации</span>
+                    <span class="info-value" id="account-created">—</span>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">Приватность</h2>
+                <label class="checkbox">
+                    <input type="checkbox" id="private-profile">
+                    <span>Закрытый профиль</span>
+                </label>
+                <p class="hint">Если включено, ваш профиль и статистика не будут видны другим пользователям.</p>
+                <button id="save-privacy-btn" class="btn-secondary">Сохранить настройки</button>
+                <div id="privacy-error" class="error hidden"></div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">Сменить пароль</h2>
+                <input type="password" id="current-password" placeholder="Текущий пароль"
+                    autocomplete="current-password">
+                <input type="password" id="new-password" placeholder="Новый пароль" autocomplete="new-password">
+                <input type="password" id="confirm-password" placeholder="Подтвердите новый пароль"
+                    autocomplete="new-password">
+                <button id="change-password-btn" class="btn-secondary">Сменить пароль</button>
+                <div id="password-error" class="error hidden"></div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">Активные сессии</h2>
+                <div id="sessions-list" class="sessions-list">
+                    <p class="placeholder-text">Загрузка...</p>
+                </div>
+
+                <div class="logout-section">
+                    <button id="logout-btn" class="btn-secondary">Выйти из текущей сесси</button>
+                </div>
+            </div>
+
+            <div class="section section-danger">
+                <h2 class="section-title">Опасная зона</h2>
+                <p class="hint">Удаление аккаунта — необратимое действие. Все ваши данные будут удалены без возможности
+                    восстановления.</p>
+                <button id="delete-account-btn" class="btn-danger">Удалить аккаунт</button>
+                <div id="delete-error" class="error hidden"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="delete-modal" class="modal hidden">
+        <div class="modal-content">
+            <h2>Подтверждение удаления</h2>
+            <p>Вы уверены, что хотите удалить аккаунт? Это действие невозможно отменить.</p>
+            <input type="password" id="delete-password" placeholder="Введите пароль для подтверждения"
+                autocomplete="current-password">
+            <div id="delete-modal-error" class="error hidden"></div>
+            <div class="modal-buttons">
+                <button id="confirm-delete-btn" class="btn-danger">Удалить</button>
+                <button id="cancel-delete-btn" class="btn-secondary">Отмена</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        window.__accountData = __ACCOUNT_DATA_PLACEHOLDER__;
+    </script>
+    <script src="account.js"></script>
+</body>
+
+</html>

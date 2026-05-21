@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,6 +9,7 @@
   <link rel="stylesheet" href="colors.css" />
   <link rel="stylesheet" href="styles.css" />
 </head>
+
 <body>
   <div class="auth-container">
     <header class="auth-header">
@@ -18,36 +20,34 @@
     <main class="auth-main">
       <form id="auth-form" class="auth-form">
         <div class="form-field">
-          <h2 for="handle-input">Хэндл</h2>
-          <input
-            type="text"
-            id="handle-input"
-            name="handle"
-            placeholder="Например: tourist"
-            autocomplete="off"
-            spellcheck="false"
-          />
+          <h2>Хэндл</h2>
+          <input type="text" id="handle-input" placeholder="Например: tourist" autocomplete="off" />
           <div id="handle-error" class="error-message"></div>
         </div>
 
         <button type="submit" class="auth-submit-btn">
-          <span>Войти</span>
+          Войти
         </button>
       </form>
-    </main>
 
-    <footer>
+      <div id="guest-notice" class="guest-notice" style="display: none;">
         <p>
-          Данные берутся только из публичного API Codeforces.  
-          Мы не сохраняем ваш пароль — здесь его даже не просят!
+          <span class="guest-label">Гостевой режим</span>
+          <a href="/auth" id="show-register" class="register-link">Авторизация</a>
         </p>
-    </footer>
+      </div>
+
+      <footer>
+        <p> Данные берутся только из публичного API Codeforces.</p>
+        <p> Хэндл не привязан к аккаунту — вы можете использовать любой присутствующий на codeforces профиль!</p>
+      </footer>
   </div>
 
   <div class="developer-info-footer">
-    <p>// Разработано Блиновым Артёмом в рамках курсовой работы</p>
+    <p>// Разработано Блиновым Артёмом</p>
   </div>
 
   <script src="auth.js"></script>
 </body>
+
 </html>

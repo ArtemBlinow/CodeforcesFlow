@@ -94,7 +94,6 @@
   background-color: #ff4444;
 }
 
-/* Мобильная адаптация */
 @media (max-width: 600px) {
   .profile-header {
     flex-direction: column;

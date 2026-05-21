@@ -2,7 +2,7 @@ const urlParams = new URLSearchParams(window.location.search);
 const handle = urlParams.get('handle');
 
 if (!handle) {
-  window.location.href = 'index.html';
+  window.location.href = '/';
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -18,7 +18,7 @@ async function loadUserProfile(handle) {
 
     if (data.status !== 'OK') {
       alert('Пользователь не найден. Возврат на главную.');
-      window.location.href = 'index.html';
+      window.location.href = '/';
       return;
     }
 
@@ -27,7 +27,7 @@ async function loadUserProfile(handle) {
   } catch (err) {
     console.error(err);
     alert('Не удалось загрузить профиль. Проверьте интернет.');
-    window.location.href = 'index.html';
+    window.location.href = '/';
   }
 }
 
@@ -109,9 +109,13 @@ function getRankName(rating) {
   return 'Legendary Grandmaster';
 }
 
+document.getElementById('account-btn')?.addEventListener('click', () => {
+  window.location.href = 'account';
+});
+
 document.getElementById('logout-btn')?.addEventListener('click', () => {
   localStorage.removeItem('codeforcesHandle');
-  window.location.href = 'index.html';
+  window.location.href = '/';
 });
 
 function getRankColor(rating) {
