@@ -14,12 +14,6 @@ CodeforcesFlow — это веб-приложение для оценки нав
 - `Front/` — фронтенд файлы (HTML, CSS, JS)
 - `database.db` — база данных SQLite
 
-## Установка
-
-```bash
-npm install
-```
-
 ## Запуск
 
 ```bash
