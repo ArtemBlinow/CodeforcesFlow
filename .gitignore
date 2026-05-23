@@ -1,3 +1,205 @@
+# Logs and temp files
+*.log
+*.tmp
+*.swp
+
+# Environment
+.env
+.env.local
+*.env.*
+
+# Editors
+.vscode/
+.idea/
+
+# Dependencies
+node_modules/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.so
+*.dylib
+*.dll
+*.exe
+*.out
+*.class
+*.o
+*.obj
+
+# Build artifacts
+dist/
+build/
+target/
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.tar.bz2
+*.tar.xz
+*.gz
+*.bz2
+*.xz
+*.7z
+*.rar
+*.zst
+*.lz4
+*.lzh
+*.cab
+*.arj
+*.rpm
+*.deb
+*.Z
+*.lz
+*.lzo
+
+# Coverage
+coverage/
+htmlcov/
+.coverage
+
+# Python specific
+*.pyc
+__pycache__/
+*.pyo
+*.pyd
+.Python
+*.so
+*.egg-info/
+.eggs/
+.mypy_cache/
+.pytest_cache/
+.tox/
+.hypothesis/
+
+# Node.js specific
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.npm
+.nuxt
+.next
+.cache/
+.output/
+
+# Java specific
+*.class
+*.jar
+*.war
+*.ear
+*.nar
+*.so
+*.dll
+*.dylib
+target/
+.gradle/
+build/
+bin/
+gen/
+
+# C/C++ specific
+*.o
+*.obj
+*.exe
+*.a
+*.lib
+*.so
+*.dylib
+*.dll
+*.out
+*.dSYM/
+*.pdb
+
+# Go specific
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.prof
+*.cache
+*.cached
+
+# Ruby specific
+*.gem
+*.rbc
+*.sass-cache
+.bundle/
+vendor/bundle/
+.rbenv-vars
+.ruby-version
+
+# Rust specific
+target/
+Cargo.lock
+
+# System files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Icon?
+.CFUserTextEncoding
+.Spotlight-V100
+.Trashes
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE specific
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Coverage reports
+coverage/
+*.lcov
+*.info
+*.gcov
+*.profdata
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.backup
+*.swp
+*.swo
+
+# Distribution / packaging
+.Python
+*.so
+*.egg-info/
+.eggs/
+.installed.cfg
+*.egg
+
+# Testing
+.pytest_cache/
+.hypothesis/
+.coverage
+coverage.xml
+nosetests.xml
+
+# Virtual environments
+venv/
+.venv/
+ENV/
+env.bak/
+
 # Logs
 logs
 *.log

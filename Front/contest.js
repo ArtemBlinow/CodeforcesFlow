@@ -112,14 +112,12 @@ function renderProblems() {
             currentProblemLetter = p.letter;
             renderProblems();
 
-            // Показываем название задачи
             const problemTitle = document.getElementById('problemTitle');
             if (problemTitle) {
                 problemTitle.textContent = p.title || `Задача ${p.letter}`;
                 problemTitle.classList.remove('hidden');
             }
 
-            // Инициализируем статистику если её нет
             if (!problemStats[currentProblemLetter]) {
                 problemStats[currentProblemLetter] = {
                     reading: 0,
@@ -131,7 +129,6 @@ function renderProblems() {
                 };
             }
 
-            // Обновляем отображение
             updateProblemStatsDisplay();
             updateCurrentProblemTitle();
 

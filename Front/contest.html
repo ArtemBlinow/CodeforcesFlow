@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Codeforces Tracker</title>
-  <link rel="icon" type="image/png" sizes="64x64" href="codeforces.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Codeforces Flow Contest</title>
+  <link rel="icon" type="image/png" sizes="64x64" href="logo.png" />
   <link rel="stylesheet" href="colors.css" />
   <link rel="stylesheet" href="contest.css" />
 </head>
+
 <body>
   <div class="container">
-    <h1>Contest Tracker</h1>
+    <h1>Contest Flow</h1>
 
     <div>
       <div id="setup" class="setup">
@@ -34,10 +36,10 @@
           <button id="pauseBtn">Стоп</button>
           <button id="finishBtn">Завершить</button>
         </div>
-        
+
         <div class="problem-grid" id="problemGrid"></div>
         <div id="problemTitle" class="problem-title hidden"></div>
-        
+
         <div class="problem-stats" id="problemStats">
           <h3 id="currentProblemStatsTitle">Статистика для задачи <span id="currentProblemLetter">—</span></h3>
           <div class="stats-grid">
@@ -66,7 +68,7 @@
               <span class="stat-value" id="timeOther">00:00:00</span>
             </div>
           </div>
-          
+
           <div class="stage-selector">
             <h4>Чем сейчас занят?</h4>
             <div class="stage-buttons">
@@ -91,4 +93,5 @@
 
   <script src="contest.js"></script>
 </body>
+
 </html>
